@@ -176,4 +176,17 @@ describe('stringify()', function () {
         global.Buffer = tempBuffer;
         done();
     });
+
+    it('sorts keys with sort = true', function (done) {
+
+        expect(Qs.stringify({ z: 'y', x: 'c', b: 'a'}, { sort: true })).to.equal('b=a&x=c&z=y');
+        done();
+    });
+
+    it('sorts keys in complicated objects with sort = true', function (done) {
+
+        expect(Qs.stringify({ z: 'y', x: 'd', e: { f: 'a', b: 'c' } }, { sort: true })).to.equal('e%5Bb%5D=c&e%5Bf%5D=a&x=d&z=y');
+        done();
+    });
+
 });
